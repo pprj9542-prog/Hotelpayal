@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Payal — Luxury Rooms, Suites &amp; Owner 10-Yr Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+              sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { font-family: 'DM Sans', system-ui, sans-serif; background: #fafaf9; color: #1c1917; }
+      h1, h2, .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+      .tabular-nums { font-variant-numeric: tabular-nums; }
+      @media print { .no-print { display: none !important; } }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-stone-50 text-stone-900 antialiased">
+    <!-- TOP BAR -->
+    <header class="no-print sticky top-0 z-40 border-b border-stone-200 bg-white/95 backdrop-blur-sm">
+      <div class="mx-auto flex max-w-[1280px] items-center justify-between gap-8 px-4 py-3.5 sm:px-6">
+        <button
+          id="brandBtn"
+          type="button"
+          class="font-display text-2xl font-bold tracking-tight text-stone-900 whitespace-nowrap shrink-0"
+        >
+          Hotel Payal
+        </button>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600">
+          <button type="button" data-nav="rooms" class="hover:text-stone-900 whitespace-nowrap shrink-0">
+            Rooms &amp; Suites
+          </button>
+          <button type="button" data-nav="heritage" class="hover:text-stone-900 whitespace-nowrap shrink-0">
+            Hospitality
+          </button>
+          <button type="button" data-nav="admin-res" class="hover:text-stone-900 whitespace-nowrap shrink-0">
+            Admin Dashboard
+          </button>
+          <button type="button" data-nav="admin-archive" class="hover:text-stone-900 whitespace-nowrap shrink-0">
+            Owner 10-Yr Vault
+          </button>
+        </nav>
+
+        <div class="shrink-0">
+          <button
+            id="headerPrimaryBtn"
+            type="button"
+            class="min-h-[40px] rounded-lg bg-stone-900 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-stone-800 whitespace-nowrap shrink-0"
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 overflow-x-auto border-t border-stone-100 px-4 py-2 text-xs font-medium text-stone-600 md:hidden">
+        <button type="button" data-nav="rooms" class="whitespace-nowrap shrink-0">Rooms &amp; Suites</button>
+        <button type="button" data-nav="admin-res" class="whitespace-nowrap shrink-0">Admin Dashboard</button>
+        <button type="button" data-nav="admin-archive" class="whitespace-nowrap shrink-0">Owner 10-Yr Vault</button>
+      </div>
+    </header>
+
+    <!-- GUEST HOTEL VIEW -->
+    <main id="hotelView" class="flex-1">
+      <!-- HERO BANNER + QUICK AVAILABILITY SEARCH -->
+      <section class="relative overflow-hidden border-b border-stone-200 bg-stone-900">
+        <div class="relative min-h-[520px] w-full bg-gradient-to-br from-stone-900 via-stone-800 to-amber-950">
+          <div class="relative mx-auto flex min-h-[520px] max-w-[1280px] flex-col justify-end px-4 pb-10 pt-20 sm:px-6 lg:pb-14">
+            <div class="max-w-2xl">
+              <div class="flex flex-wrap items-center gap-2.5 text-xs font-medium tracking-wide text-stone-300">
+                <span>Hotel Payal</span>
+                <span aria-hidden="true">·</span>
+                <span>Sitamarhi Courtyard</span>
+                <span aria-hidden="true">·</span>
+                <span>Instant Confirmation</span>
+              </div>
+              <h1 class="mt-3 text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Thoughtful hospitality, built for restful stays.
+              </h1>
+              <p class="mt-4 max-w-xl text-base leading-relaxed text-stone-200 sm:text-lg">
+                Reserve sunlit rooms and private courtyard suites with transparent nightly rates,
+                instant booking receipts, and dedicated staff care.
+              </p>
+            </div>
+
+            <form id="availabilityForm" novalidate class="mt-8 rounded-xl border border-white/15 bg-white p-4 shadow-xl sm:p-5">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:items-end">
+                <div class="lg:col-span-3">
+                  <label for="heroCheckin" class="mb-1.5 block text-xs font-semibold text-stone-700">Check-in Date</label>
+                  <input id="heroCheckin" type="date" class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 font-mono text-sm tabular-nums text-stone-900 focus:border-stone-900 focus:outline-none" />
+                </div>
+                <div class="lg:col-span-3">
+                  <label for="heroCheckout" class="mb-1.5 block text-xs font-semibold text-stone-700">Check-out Date</label>
+                  <input id="heroCheckout" type="date" class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 font-mono text-sm tabular-nums text-stone-900 focus:border-stone-900 focus:outline-none" />
+                </div>
+                <div class="lg:col-span-3">
+                  <label for="heroGuests" class="mb-1.5 block text-xs font-semibold text-stone-700">Guests</label>
+                  <select id="heroGuests" class="w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 font-mono text-sm tabular-nums text-stone-900 focus:border-stone-900 focus:outline-none">
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                  </select>
+                </div>
+                <div class="lg:col-span-3">
+                  <button type="submit" class="min-h-[44px] w-full rounded-lg bg-stone-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-stone-800 whitespace-nowrap">
+                    Check Availability
+                  </button>
+                </div>
+              </div>
+              <p id="heroSearchError" class="mt-2.5 hidden text-xs font-medium text-red-700"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROOMS & SUITES SECTION -->
+      <section id="rooms-suites" class="mx-auto max-w-[1280px] px-4 py-14 sm:px-6 lg:py-16">
+        <div class="flex flex-col justify-between gap-4 border-b border-stone-200 pb-6 sm:flex-row sm:items-end">
+          <div>
+            <p class="text-xs font-semibold tracking-wide text-amber-800">Accommodations</p>
+            <h2 class="mt-1 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">Rooms &amp; Suites</h2>
+            <p id="roomsSubtitle" class="mt-2 max-w-2xl text-sm leading-relaxed text-stone-600">
+              All rooms include daily courtyard breakfast, high-speed Wi-Fi, and 24-hour front-desk concierge.
+            </p>
+          </div>
+          <button id="resetRoomFilterBtn" type="button" class="hidden rounded-lg border border-stone-300 bg-white px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-100 whitespace-nowrap">
+            Show All 4 Rooms
+          </button>
+        </div>
+
+        <div id="roomsGrid" class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2"></div>
+      </section>
+
+      <!-- HOSPITALITY HERITAGE SECTION -->
+      <section id="hospitality-heritage" class="border-t border-stone-200 bg-white py-14 lg:py-16">
+        <div class="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:items-center">
+          <div class="lg:col-span-6">
+            <p class="text-xs font-semibold tracking-wide text-amber-800">Continuity &amp; Guest Care</p>
+            <h2 class="mt-2 font-display text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+              Over a decade of personal hospitality, remembered down to every preference.
+            </h2>
+            <p class="mt-4 text-sm leading-relaxed text-stone-600 sm:text-base">
+              Every stay at Hotel Payal is logged into our owner-managed customer archive, enabling our concierge team
+              to recognize returning families, honor room preferences, and issue instant digital confirmation receipts.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-stone-50 sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:col-span-6">
+            <div class="p-6">
+              <div class="font-mono text-3xl font-bold tabular-nums text-stone-900">10+ Yrs</div>
+              <div class="mt-1 text-xs font-medium text-stone-600">Owner customer history preserved (2014–2026+)</div>
+            </div>
+            <div class="p-6">
+              <div class="font-mono text-3xl font-bold tabular-nums text-stone-900">24/7</div>
+              <div class="mt-1 text-xs font-medium text-stone-600">Front-desk check-in &amp; concierge support</div>
+            </div>
+            <div class="p-6">
+              <div class="font-mono text-3xl font-bold tabular-nums text-stone-900">Instant</div>
+              <div class="mt-1 text-xs font-medium text-stone-600">Printable confirmation receipt on booking</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ADMIN & 10-YEAR OWNER DATABASE VIEW -->
+    <main id="adminView" class="hidden flex-1 mx-auto w-full max-w-[1280px] px-4 py-8 sm:px-6">
+      <div id="adminAuthGate" class="mx-auto max-w-xl py-10">
+        <div class="rounded-xl border border-stone-200 bg-white p-8 text-center">
+          <h2 class="font-display text-3xl font-semibold text-stone-900">Staff &amp; Owner Portal</h2>
+          <p id="adminAuthText" class="mt-2 text-sm leading-relaxed text-stone-600">
+            Sign in with your verified Hotel Payal staff or owner Google account to confirm incoming reservations and access the 10+ year customer database.
+          </p>
+          <button id="googleSignInBtn" type="button" class="mt-6 min-h-[44px] rounded-lg bg-stone-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-stone-800">
+            Sign in with Google
+          </button>
+          <button id="switchAccountBtn" type="button" class="hidden mt-6 min-h-[44px] rounded-lg border border-stone-300 bg-white px-5 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-50">
+            Sign Out &amp; Switch Account
+          </button>
+        </div>
+      </div>
+
+      <div id="adminWorkspace" class="hidden">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-stone-200 pb-5">
+          <div>
+            <p class="text-xs font-semibold text-amber-800">Hotel Payal Operations</p>
+            <h1 class="mt-1 font-display text-3xl font-semibold text-stone-900">Admin Dashboard &amp; Owner Archive</h1>
+            <p id="adminUserEmail" class="mt-1 text-xs text-stone-500"></p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="flex items-center gap-1 rounded-lg bg-stone-200/70 p-1">
+              <button id="tabReservationsBtn" type="button" class="rounded-md bg-white px-3.5 py-2 text-xs font-semibold text-stone-900 shadow-xs whitespace-nowrap">
+                Incoming Reservations
+              </button>
+              <button id="tabArchiveBtn" type="button" class="rounded-md px-3.5 py-2 text-xs font-semibold text-stone-600 hover:text-stone-900 whitespace-nowrap">
+                Owner 10+ Year Database
+              </button>
+            </div>
+            <button id="signOutBtn" type="button" class="min-h-[38px] rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-xs font-semibold text-stone-700 hover:bg-stone-50">
+              Sign Out
+            </button>
+          </div>
+        </div>
+
+        <div id="adminBanner" class="hidden mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"></div>
+
+        <!-- SUB-TAB 1: RESERVATIONS -->
+        <div id="reservationsPanel" class="mt-6">
+          <div class="grid grid-cols-2 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white lg:grid-cols-4 lg:divide-x lg:divide-y-0">
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">Total Reservations</div><div id="kpiResTotal" class="mt-1 font-mono text-2xl font-bold tabular-nums">0</div></div>
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">Pending Review</div><div id="kpiResPending" class="mt-1 font-mono text-2xl font-bold tabular-nums text-amber-800">0</div></div>
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">Confirmed Stays</div><div id="kpiResConfirmed" class="mt-1 font-mono text-2xl font-bold tabular-nums text-emerald-700">0</div></div>
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">Confirmed Revenue</div><div id="kpiResRevenue" class="mt-1 font-mono text-2xl font-bold tabular-nums">₹0</div></div>
+          </div>
+
+          <div class="mt-6 rounded-xl border border-stone-200 bg-white p-5">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <input id="resSearchInput" type="text" placeholder="Search by code, guest, phone, email, or room..." class="min-w-[230px] flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-stone-900 focus:outline-none" />
+              <select id="resStatusFilter" class="rounded-lg border border-stone-300 px-3 py-2 text-xs font-semibold text-stone-700">
+                <option value="ALL">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+              <button id="exportResCsvBtn" type="button" class="rounded-lg border border-stone-300 bg-white px-3.5 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50">
+                Export CSV
+              </button>
+            </div>
+            <div class="mt-4 overflow-x-auto rounded-lg border border-stone-200">
+              <table class="w-full border-collapse text-left text-sm">
+                <thead class="border-b border-stone-200 bg-stone-50 text-xs font-semibold text-stone-600">
+                  <tr>
+                    <th class="px-4 py-3">Booking Code</th>
+                    <th class="px-4 py-3">Guest &amp; Contact</th>
+                    <th class="px-4 py-3">Room &amp; Dates</th>
+                    <th class="px-4 py-3 text-right">Total</th>
+                    <th class="px-4 py-3">Status</th>
+                    <th class="px-4 py-3 text-right">Staff Action</th>
+                  </tr>
+                </thead>
+                <tbody id="reservationsTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 2: 10+ YEAR OWNER CUSTOMER ARCHIVE -->
+        <div id="archivePanel" class="hidden mt-6">
+          <div class="grid grid-cols-2 divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white lg:grid-cols-4 lg:divide-x lg:divide-y-0">
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">Archived Customers</div><div id="kpiCustTotal" class="mt-1 font-mono text-2xl font-bold tabular-nums">0</div></div>
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">Archive Span</div><div id="kpiCustSpan" class="mt-1 font-mono text-2xl font-bold tabular-nums text-amber-800">10+ Years</div></div>
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">VIP &amp; Returning</div><div id="kpiCustVip" class="mt-1 font-mono text-2xl font-bold tabular-nums text-emerald-700">0</div></div>
+            <div class="p-5"><div class="text-xs font-medium text-stone-500">Cumulative Spend</div><div id="kpiCustSpend" class="mt-1 font-mono text-2xl font-bold tabular-nums">₹0</div></div>
+          </div>
+
+          <div class="mt-6 rounded-xl border border-stone-200 bg-white p-5">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 pb-4">
+              <div>
+                <h3 class="font-display text-2xl font-semibold text-stone-900">Owner 10+ Year Customer Database</h3>
+                <p class="text-xs text-stone-500">Searchable historical ledger tracking customer profiles, stay frequency, and lifetime spend (2014–2026+).</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button id="seedArchiveBtn" type="button" class="rounded-lg border border-stone-300 bg-white px-3.5 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50">
+                  Seed 10+ Yr Archive (2014–2026)
+                </button>
+                <button id="openAddCustomerBtn" type="button" class="rounded-lg bg-stone-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-stone-800">
+                  + Add Legacy Customer
+                </button>
+                <button id="exportCustCsvBtn" type="button" class="rounded-lg border border-stone-300 bg-white px-3.5 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50">
+                  CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center gap-3">
+              <input id="custSearchInput" type="text" placeholder="Search by name, customer ID, city, phone, email, or year..." class="min-w-[230px] flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-stone-900 focus:outline-none" />
+              <select id="custEraFilter" class="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700">
+                <option value="ALL">All Eras (2014–2026)</option>
+                <option value="2014-2016">2014–2016 (10+ Yrs Ago)</option>
+                <option value="2017-2019">2017–2019</option>
+                <option value="2020-2022">2020–2022</option>
+                <option value="2023-2026">2023–2026 (Recent)</option>
+              </select>
+              <select id="custTierFilter" class="rounded-lg border border-stone-300 px-3 py-2 text-xs font-medium text-stone-700">
+                <option value="ALL">All Tiers</option>
+                <option value="VIP">VIP</option>
+                <option value="Returning">Returning</option>
+                <option value="Standard">Standard</option>
+              </select>
+            </div>
+
+            <div class="mt-4 overflow-x-auto rounded-lg border border-stone-200">
+              <table class="w-full border-collapse text-left text-sm">
+                <thead class="border-b border-stone-200 bg-stone-50 text-xs font-semibold text-stone-600">
+                  <tr>
+                    <th class="px-4 py-3">Customer ID &amp; Span</th>
+                    <th class="px-4 py-3">Guest &amp; City</th>
+                    <th class="px-4 py-3">Contact</th>
+                    <th class="px-4 py-3">Stay History &amp; Room</th>
+                    <th class="px-4 py-3 text-right">Lifetime Spend</th>
+                    <th class="px-4 py-3">Tier</th>
+                  </tr>
+                </thead>
+                <tbody id="customersTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- BOOKING SUMMARY & INSTANT RECEIPT MODAL -->
+    <div id="bookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-stone-950/60 p-4">
+      <div class="my-8 w-full max-w-2xl overflow-hidden rounded-xl border border-stone-200 bg-white shadow-2xl">
+        <div class="flex items-center justify-between border-b border-stone-200 px-6 py-4">
+          <div>
+            <p class="text-xs font-semibold text-amber-800">Hotel Payal</p>
+            <h2 id="bookingModalTitle" class="font-display text-2xl font-semibold text-stone-900">Reserve Room</h2>
+          </div>
+          <button id="closeBookingModalBtn" type="button" class="no-print rounded-lg px-2.5 py-1.5 text-sm font-semibold text-stone-500 hover:bg-stone-100">✕</button>
+        </div>
+
+        <!-- STEP 1: BOOKING FORM -->
+        <form id="bookingModalForm" novalidate class="p-6">
+          <div class="flex flex-col gap-4 rounded-lg border border-stone-200 bg-stone-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div id="modalRoomMeta" class="text-xs text-stone-500"></div>
+              <div id="modalRoomName" class="font-display text-xl font-semibold text-stone-900"></div>
+              <div id="modalRoomRate" class="mt-1 font-mono text-xs tabular-nums text-stone-600"></div>
+            </div>
+            <div class="sm:text-right">
+              <div class="text-xs text-stone-500">Estimated Total</div>
+              <div id="modalEstimatedTotal" class="font-mono text-xl font-bold tabular-nums text-stone-900">₹0</div>
+              <div id="modalNightsCount" class="font-mono text-xs tabular-nums text-stone-500">0 nights</div>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div>
+              <label for="modalCheckin" class="mb-1 block text-xs font-semibold text-stone-700">Check-in Date *</label>
+              <input id="modalCheckin" type="date" required class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm tabular-nums" />
+            </div>
+            <div>
+              <label for="modalCheckout" class="mb-1 block text-xs font-semibold text-stone-700">Check-out Date *</label>
+              <input id="modalCheckout" type="date" required class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm tabular-nums" />
+            </div>
+            <div>
+              <label for="modalGuests" class="mb-1 block text-xs font-semibold text-stone-700">Guests *</label>
+              <select id="modalGuests" class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm tabular-nums">
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="sm:col-span-2">
+              <label for="modalGuestName" class="mb-1 block text-xs font-semibold text-stone-700">Full Name *</label>
+              <input id="modalGuestName" type="text" required maxlength="120" placeholder="Enter full name" class="w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm" />
+            </div>
+            <div>
+              <label for="modalGuestEmail" class="mb-1 block text-xs font-semibold text-stone-700">Email Address *</label>
+              <input id="modalGuestEmail" type="email" required maxlength="160" placeholder="guest@example.com" class="w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm" />
+            </div>
+            <div>
+              <label for="modalGuestPhone" class="mb-1 block text-xs font-semibold text-stone-700">Phone Number *</label>
+              <input id="modalGuestPhone" type="tel" required maxlength="32" placeholder="+91 98765 43210" class="w-full rounded-lg border border-stone-300 px-3 py-2.5 font-mono text-sm tabular-nums" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="modalRequests" class="mb-1 block text-xs font-semibold text-stone-700">Special Requests (Optional)</label>
+              <textarea id="modalRequests" rows="2" maxlength="500" placeholder="Early check-in, airport pickup, dietary preferences..." class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"></textarea>
+            </div>
+          </div>
+
+          <p id="modalErrorMsg" class="hidden mt-4 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-xs font-medium text-red-800"></p>
+
+          <div class="mt-6 flex justify-end gap-3 border-t border-stone-200 pt-4">
+            <button id="cancelBookingModalBtn" type="button" class="rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Cancel</button>
+            <button id="submitBookingBtn" type="submit" class="rounded-lg bg-stone-900 px-5 py-2 text-sm font-semibold text-white hover:bg-stone-800">Complete Booking</button>
+          </div>
+        </form>
+
+        <!-- STEP 2: INSTANT CONFIRMATION RECEIPT -->
+        <div id="receiptPanel" class="hidden p-6">
+          <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-950">
+            <strong>Reservation received and saved to Hotel Payal.</strong> Present this confirmation receipt at check-in.
+          </div>
+          <div id="receiptDetails" class="mt-5 rounded-lg border border-stone-200 bg-stone-50 p-5 text-sm"></div>
+          <div class="no-print mt-6 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex gap-2.5">
+              <button id="printReceiptBtn" type="button" class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50">Print Receipt</button>
+              <a id="waReceiptLink" href="#" target="_blank" rel="noopener noreferrer" class="rounded-lg bg-emerald-700 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-800">Send on WhatsApp</a>
+            </div>
+            <button id="doneReceiptBtn" type="button" class="rounded-lg bg-stone-900 px-5 py-2 text-sm font-semibold text-white hover:bg-stone-800">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD LEGACY CUSTOMER MODAL -->
+    <div id="addCustomerModal" class="hidden fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-stone-950/50 p-4">
+      <div class="my-8 w-full max-w-lg rounded-xl border border-stone-200 bg-white p-6 shadow-xl">
+        <div class="flex items-center justify-between border-b border-stone-200 pb-3.5">
+          <h4 class="font-display text-2xl font-semibold text-stone-900">Add Historical Customer Record</h4>
+          <button id="closeAddCustomerBtn" type="button" class="rounded-lg px-2 py-1 text-sm font-semibold text-stone-500 hover:bg-stone-100">✕</button>
+        </div>
+        <form id="addCustomerForm" class="mt-4 space-y-3">
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div class="sm:col-span-2">
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Full Name *</label>
+              <input id="custName" type="text" required minlength="2" maxlength="120" class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Email *</label>
+              <input id="custEmail" type="email" required class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Phone *</label>
+              <input id="custPhone" type="tel" required minlength="6" class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm" />
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">City</label>
+              <input id="custCity" type="text" maxlength="80" class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Preferred Room</label>
+              <select id="custRoom" class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+                <option value="Deluxe Room">Deluxe Room</option>
+                <option value="Super Deluxe AC">Super Deluxe AC</option>
+                <option value="Family Suite">Family Suite</option>
+                <option value="Royal Heritage Suite">Royal Heritage Suite</option>
+              </select>
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">First Stay Date *</label>
+              <input id="custFirstDate" type="date" required value="2015-06-15" class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm" />
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Latest Stay Date *</label>
+              <input id="custLastDate" type="date" required value="2026-05-10" class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm" />
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Total Stays</label>
+              <input id="custStays" type="number" min="1" value="4" class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm" />
+            </div>
+            <div>
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Lifetime Spend (INR)</label>
+              <input id="custSpend" type="number" min="0" value="28000" class="w-full rounded-lg border border-stone-300 px-3 py-2 font-mono text-sm" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Loyalty Tier</label>
+              <select id="custTier" class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+                <option value="Standard">Standard</option>
+                <option value="Returning" selected>Returning</option>
+                <option value="VIP">VIP</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="mb-1 block text-xs font-semibold text-stone-700">Owner Notes</label>
+              <textarea id="custNotes" rows="2" maxlength="500" class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"></textarea>
+            </div>
+          </div>
+          <div class="flex justify-end gap-3 border-t border-stone-200 pt-4">
+            <button id="cancelAddCustomerBtn" type="button" class="rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700">Cancel</button>
+            <button type="submit" class="rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white">Save to Owner Archive</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="no-print border-t border-stone-200 bg-white">
+      <div class="mx-auto flex max-w-[1280px] flex-col justify-between gap-4 px-4 py-6 text-xs text-stone-500 sm:flex-row sm:items-center sm:px-6">
+        <div>
+          <span class="font-display text-base font-semibold text-stone-900">Hotel Payal</span>
+          <span class="mx-2">·</span>
+          <span>Sitamarhi Courtyard Hospitality &amp; Suites</span>
+        </div>
+        <div class="flex gap-4">
+          <button type="button" data-nav="rooms" class="hover:text-stone-900">Rooms &amp; Suites</button>
+          <button type="button" data-nav="admin-res" class="hover:text-stone-900">Admin Dashboard</button>
+          <button type="button" data-nav="admin-archive" class="hover:text-stone-900">10+ Year Owner Archive</button>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+      import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+      import {
+        collection,
+        doc,
+        getDoc,
+        getDocFromServer,
+        getFirestore,
+        onSnapshot,
+        orderBy,
+        query,
+        serverTimestamp,
+        setDoc,
+        updateDoc,
+        writeBatch,
+      } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+
+      const firebaseConfig = {
+        projectId: 'alien-arcana-jflln',
+        appId: '1:205754777709:web:1d340e4ab980fece3abf64',
+        apiKey: 'AIzaSyCwCWI5IkjcTPkWoolhpWUk_aXIqAvlzHk',
+        authDomain: 'alien-arcana-jflln.firebaseapp.com',
+        firestoreDatabaseId: 'ai-studio-hotelpayalbookin-b06e2b9c-d991-40d5-8cd7-79e553058fa1',
+        storageBucket: 'alien-arcana-jflln.firebasestorage.app',
+        messagingSenderId: '205754777709',
+      };
+
+      const BOOTSTRAPPED_ADMIN_EMAIL = 'kumaripriya06896@gmail.com';
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+      const auth = getAuth(app);
+      const googleProvider = new GoogleAuthProvider();
+      googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+      const OperationType = {
+        CREATE: 'create',
+        UPDATE: 'update',
+        DELETE: 'delete',
+        LIST: 'list',
+        GET: 'get',
+        WRITE: 'write',
+      };
+
+      function handleFirestoreError(error, operationType, path) {
+        const errInfo = {
+          error: error instanceof Error ? error.message : String(error),
+          authInfo: {
+            userId: auth.currentUser?.uid,
+            email: auth.currentUser?.email,
+            emailVerified: auth.currentUser?.emailVerified,
+            isAnonymous: auth.currentUser?.isAnonymous,
+          },
+          operationType,
+          path,
+        };
+        console.error('Firestore Error:', JSON.stringify(errInfo));
+        throw new Error(JSON.stringify(errInfo));
+      }
+
+      getDocFromServer(doc(db, 'test', 'connection')).catch((err) => {
+        if (err?.message?.includes('the client is offline')) {
+          console.error('Please check your Firebase configuration.');
+        }
+      });
+
+      const HOTEL_ROOMS = [
+        {
+          id: 'deluxe-room',
+          name: 'Deluxe Room',
+          category: 'Signature Stay',
+          wing: 'Courtyard Wing',
+          areaSqFt: 320,
+          maxGuests: 2,
+          bedConfig: '1 King Bed',
+          nightlyRate: 3400,
+          gradient: 'from-stone-200 to-amber-100',
+          description: 'Sunlit teak-accented sanctuary overlooking the landscaped garden courtyard with crisp cotton linens and quiet workspace.',
+          amenities: ['Complimentary Breakfast', 'High-Speed Wi-Fi', 'Rain Shower & Bath Linen', 'In-Room Tea & Coffee Bar', '24-Hour Room Service'],
+        },
+        {
+          id: 'super-deluxe-ac',
+          name: 'Super Deluxe AC',
+          category: 'Executive Comfort',
+          wing: 'Atrium Wing',
+          areaSqFt: 410,
+          maxGuests: 3,
+          bedConfig: '1 King Bed + Lounge',
+          nightlyRate: 4800,
+          gradient: 'from-stone-300 to-stone-100',
+          description: 'Spacious climate-controlled accommodation featuring travertine detailing, dedicated oak work desk, and upholstered reading lounge.',
+          amenities: ['Dual-Zone Climate AC', 'Dedicated Oak Work Desk', 'Smart 50" Streaming TV', 'Curated Minibar', 'Complimentary Breakfast'],
+        },
+        {
+          id: 'family-suite',
+          name: 'Family Suite',
+          category: 'Multi-Guest Suite',
+          wing: 'Garden Pavilion',
+          areaSqFt: 640,
+          maxGuests: 5,
+          bedConfig: '2 Queen Beds + Sofa',
+          nightlyRate: 7200,
+          gradient: 'from-amber-100 to-stone-200',
+          description: 'Expansive family suite pairing two plush queen beds with an open marble-table sitting lounge designed for multi-day group stays.',
+          amenities: ['Two Queen Beds & Sitting Lounge', 'Breakfast for Up to 5 Guests', 'Dual Wardrobe & Vanity', 'High-Speed Wi-Fi & Smart TV', 'Priority Early Check-In'],
+        },
+        {
+          id: 'royal-heritage-suite',
+          name: 'Royal Heritage Suite',
+          category: 'Flagship Suite',
+          wing: 'Terrace Level',
+          areaSqFt: 880,
+          maxGuests: 4,
+          bedConfig: '1 Master King + Living Room',
+          nightlyRate: 11500,
+          gradient: 'from-amber-200 to-stone-300',
+          description: 'Private terrace suite opening onto courtyard greenery with separate parlor, brushed brass fixtures, and dedicated concierge service.',
+          amenities: ['Private Courtyard Balcony', 'Separate Parlor & Dining', 'Dedicated Butler Concierge', 'Complimentary Airport Pickup', 'Evening Turndown & Breakfast'],
+        },
+      ];
+
+      const TEN_YEAR_SEEDS = [
+        { id: 'cust_seed_2014_01', customerCode: 'HP-CUST-2014-001', fullName: 'Rajeshwar Prasad Singh', email: 'rajeshwar.singh@example.com', phone: '+91 98350 11204', city: 'Patna', firstStayDate: '2014-03-18', lastStayDate: '2026-09-12', firstStayYear: 2014, lastStayYear: 2026, totalStays: 19, lifetimeSpend: 164200, preferredRoom: 'Royal Heritage Suite', loyaltyTier: 'VIP', notes: '12-year patron since March 2014.' },
+        { id: 'cust_seed_2015_02', customerCode: 'HP-CUST-2015-014', fullName: 'Ananya Verma', email: 'ananya.verma@example.com', phone: '+91 94310 44821', city: 'Muzaffarpur', firstStayDate: '2015-11-04', lastStayDate: '2025-12-22', firstStayYear: 2015, lastStayYear: 2025, totalStays: 14, lifetimeSpend: 92800, preferredRoom: 'Super Deluxe AC', loyaltyTier: 'VIP', notes: 'Corporate auditor visiting every winter since 2015.' },
+        { id: 'cust_seed_2016_03', customerCode: 'HP-CUST-2016-029', fullName: 'Dr. Arvind Mishra', email: 'dr.arvind.mishra@example.com', phone: '+91 99341 78012', city: 'Darbhanga', firstStayDate: '2016-02-14', lastStayDate: '2024-08-19', firstStayYear: 2016, lastStayYear: 2024, totalStays: 11, lifetimeSpend: 76400, preferredRoom: 'Deluxe Room', loyaltyTier: 'Returning', notes: 'Medical conference guest since 2016.' },
+        { id: 'cust_seed_2017_04', customerCode: 'HP-CUST-2017-042', fullName: 'Meenakshi & Vivek Kulkarni', email: 'vivek.kulkarni@example.com', phone: '+91 98201 55390', city: 'Pune', firstStayDate: '2017-07-09', lastStayDate: '2026-04-03', firstStayYear: 2017, lastStayYear: 2026, totalStays: 9, lifetimeSpend: 108500, preferredRoom: 'Family Suite', loyaltyTier: 'VIP', notes: 'Travels with family of 4 since 2017.' },
+        { id: 'cust_seed_2018_05', customerCode: 'HP-CUST-2018-067', fullName: 'Sandeep Kumar Jha', email: 'sandeep.jha@example.com', phone: '+91 97714 23901', city: 'Sitamarhi', firstStayDate: '2018-05-21', lastStayDate: '2023-11-15', firstStayYear: 2018, lastStayYear: 2023, totalStays: 7, lifetimeSpend: 41200, preferredRoom: 'Deluxe Room', loyaltyTier: 'Returning', notes: 'Prompt check-out history.' },
+        { id: 'cust_seed_2019_06', customerCode: 'HP-CUST-2019-083', fullName: 'Neha & Rohit Agarwal', email: 'rohit.agarwal@example.com', phone: '+91 98111 67230', city: 'New Delhi', firstStayDate: '2019-10-12', lastStayDate: '2026-10-28', firstStayYear: 2019, lastStayYear: 2026, totalStays: 8, lifetimeSpend: 118000, preferredRoom: 'Royal Heritage Suite', loyaltyTier: 'VIP', notes: 'Annual festive-season guests since 2019.' },
+        { id: 'cust_seed_2021_08', customerCode: 'HP-CUST-2021-051', fullName: 'Shruti Chatterjee', email: 'shruti.chatterjee@example.com', phone: '+91 98300 41278', city: 'Kolkata', firstStayDate: '2021-08-14', lastStayDate: '2024-12-06', firstStayYear: 2021, lastStayYear: 2024, totalStays: 4, lifetimeSpend: 34800, preferredRoom: 'Super Deluxe AC', loyaltyTier: 'Returning', notes: 'Prefers upper-floor rooms.' },
+        { id: 'cust_seed_2024_10', customerCode: 'HP-CUST-2024-112', fullName: 'Kavita Deshmukh', email: 'kavita.deshmukh@example.com', phone: '+91 97650 32145', city: 'Nagpur', firstStayDate: '2024-06-19', lastStayDate: '2026-07-24', firstStayYear: 2024, lastStayYear: 2026, totalStays: 2, lifetimeSpend: 19200, preferredRoom: 'Deluxe Room', loyaltyTier: 'Standard', notes: 'Vegetarian dining preference.' },
+      ];
+
+      const today = new Date();
+      const tmr = new Date(today); tmr.setDate(today.getDate() + 1);
+      const aft = new Date(today); aft.setDate(today.getDate() + 3);
+      let searchState = { checkin: tmr.toISOString().slice(0, 10), checkout: aft.toISOString().slice(0, 10), guests: 2, filtered: false };
+      let activeRoom = null;
+      let reservations = [];
+      let customers = [];
+      let unsubRes = null;
+      let unsubCust = null;
+
+      const formatINR = (n) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n);
+      const calcNights = (inD, outD) => {
+        if (!inD || !outD) return 0;
+        const diff = new Date(`${outD}T00:00:00`) - new Date(`${inD}T00:00:00`);
+        return diff > 0 ? Math.round(diff / 86400000) : 0;
+      };
+      const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      const buildCustDocId = (email, phone) => {
+        const key = (email || phone || 'guest').toLowerCase().trim();
+        let h = 0;
+        for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+        return `cust_${(key.replace(/[^a-z0-9]/g, '').slice(0, 16) || 'guest')}_${h.toString(36)}`;
+      };
+
+      document.getElementById('heroCheckin').value = searchState.checkin;
+      document.getElementById('heroCheckout').value = searchState.checkout;
+
+      function switchView(mode) {
+        const hotelEl = document.getElementById('hotelView');
+        const adminEl = document.getElementById('adminView');
+        const headerBtn = document.getElementById('headerPrimaryBtn');
+        if (mode === 'hotel') {
+          hotelEl.classList.remove('hidden');
+          adminEl.classList.add('hidden');
+          headerBtn.textContent = 'Book Now';
+          headerBtn.onclick = () => openBookingModal(HOTEL_ROOMS[0]);
+        } else {
+          hotelEl.classList.add('hidden');
+          adminEl.classList.remove('hidden');
+          headerBtn.textContent = 'Back to Hotel';
+          headerBtn.onclick = () => switchView('hotel');
+          setAdminSubTab(mode === 'admin-archive' ? 'archive' : 'reservations');
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      document.getElementById('brandBtn').onclick = () => switchView('hotel');
+      document.querySelectorAll('[data-nav]').forEach((btn) => {
+        btn.onclick = () => {
+          const target = btn.getAttribute('data-nav');
+          if (target === 'rooms' || target === 'heritage') {
+            switchView('hotel');
+            setTimeout(() => document.getElementById(target === 'rooms' ? 'rooms-suites' : 'hospitality-heritage')?.scrollIntoView({ behavior: 'smooth' }), 50);
+          } else {
+            switchView(target);
+          }
+        };
+      });
+      switchView('hotel');
+
+      function renderRooms() {
+        const nights = calcNights(searchState.checkin, searchState.checkout);
+        const rooms = searchState.filtered ? HOTEL_ROOMS.filter((r) => r.maxGuests >= searchState.guests) : HOTEL_ROOMS;
+        document.getElementById('resetRoomFilterBtn').classList.toggle('hidden', !searchState.filtered || rooms.length === HOTEL_ROOMS.length);
+        document.getElementById('roomsSubtitle').textContent = searchState.filtered && nights > 0
+          ? `Showing ${rooms.length} room(s) for ${nights} night(s) (${searchState.checkin} to ${searchState.checkout}) · ${searchState.guests} Guest(s).`
+          : 'All rooms include daily courtyard breakfast, high-speed Wi-Fi, and 24-hour front-desk concierge.';
+
+        const grid = document.getElementById('roomsGrid');
+        grid.innerHTML = rooms.map((room) => {
+          const total = nights > 0 ? room.nightlyRate * nights : null;
+          return `
+            <article class="flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white">
+              <div class="aspect-[4/3] w-full bg-gradient-to-br ${room.gradient} flex flex-col justify-end p-6">
+                <span class="text-xs font-semibold text-stone-700">${esc(room.category)} · ${esc(room.wing)}</span>
+                <span class="font-display text-3xl font-semibold text-stone-900">${esc(room.name)}</span>
+              </div>
+              <div class="flex flex-1 flex-col justify-between p-6">
+                <div>
+                  <div class="text-xs text-stone-500 font-mono tabular-nums">${room.areaSqFt} sq ft · Up to ${room.maxGuests} Guests · ${esc(room.bedConfig)}</div>
+                  <p class="mt-2 text-sm leading-relaxed text-stone-600">${esc(room.description)}</p>
+                  <ul class="mt-4 grid grid-cols-1 gap-2 border-t border-stone-100 pt-4 sm:grid-cols-2">
+                    ${room.amenities.map((a) => `<li class="text-xs text-stone-700">✓ ${esc(a)}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-stone-200 pt-5">
+                  <div>
+                    <div class="font-mono text-xl font-bold tabular-nums text-stone-900">${formatINR(room.nightlyRate)} <span class="text-xs font-normal text-stone-500">/ night</span></div>
+                    ${total ? `<div class="font-mono text-xs tabular-nums text-stone-600">${nights} night(s) total: <strong>${formatINR(total)}</strong></div>` : ''}
+                  </div>
+                  <button type="button" data-book-id="${room.id}" class="min-h-[44px] rounded-lg bg-stone-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-stone-800">Book Now</button>
+                </div>
+              </div>
+            </article>`;
+        }).join('');
+
+        grid.querySelectorAll('[data-book-id]').forEach((btn) => {
+          btn.onclick = () => openBookingModal(HOTEL_ROOMS.find((r) => r.id === btn.getAttribute('data-book-id')));
+        });
+      }
+
+      document.getElementById('availabilityForm').onsubmit = (e) => {
+        e.preventDefault();
+        const inD = document.getElementById('heroCheckin').value;
+        const outD = document.getElementById('heroCheckout').value;
+        const g = Number(document.getElementById('heroGuests').value);
+        const errEl = document.getElementById('heroSearchError');
+        if (calcNights(inD, outD) < 1) {
+          errEl.textContent = 'Check-out date must be at least 1 night after check-in.';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        errEl.classList.add('hidden');
+        searchState = { checkin: inD, checkout: outD, guests: g, filtered: true };
+        renderRooms();
+        document.getElementById('rooms-suites').scrollIntoView({ behavior: 'smooth' });
+      };
+
+      document.getElementById('resetRoomFilterBtn').onclick = () => {
+        searchState.filtered = false;
+        renderRooms();
+      };
+      renderRooms();
+
+      // BOOKING MODAL
+      function updateModalTotals() {
+        if (!activeRoom) return;
+        const inD = document.getElementById('modalCheckin').value;
+        const outD = document.getElementById('modalCheckout').value;
+        const n = calcNights(inD, outD);
+        document.getElementById('modalEstimatedTotal').textContent = n > 0 ? formatINR(activeRoom.nightlyRate * n) : '—';
+        document.getElementById('modalNightsCount').textContent = n > 0 ? `${n} night(s)` : 'Select valid dates';
+      }
+
+      function openBookingModal(room) {
+        if (!room) return;
+        activeRoom = room;
+        document.getElementById('bookingModalTitle').textContent = `Reserve ${room.name}`;
+        document.getElementById('modalRoomMeta').textContent = `${room.category} · ${room.bedConfig}`;
+        document.getElementById('modalRoomName').textContent = room.name;
+        document.getElementById('modalRoomRate').textContent = `${formatINR(room.nightlyRate)} / night · Max ${room.maxGuests} Guests`;
+        document.getElementById('modalCheckin').value = searchState.checkin;
+        document.getElementById('modalCheckout').value = searchState.checkout;
+        document.getElementById('modalGuests').value = String(Math.min(room.maxGuests, searchState.guests));
+        document.getElementById('bookingModalForm').reset();
+        document.getElementById('modalCheckin').value = searchState.checkin;
+        document.getElementById('modalCheckout').value = searchState.checkout;
+        document.getElementById('modalGuests').value = String(Math.min(room.maxGuests, searchState.guests));
+        document.getElementById('modalErrorMsg').classList.add('hidden');
+        document.getElementById('bookingModalForm').classList.remove('hidden');
+        document.getElementById('receiptPanel').classList.add('hidden');
+        updateModalTotals();
+        document.getElementById('bookingModal').classList.remove('hidden');
+      }
+
+      document.getElementById('modalCheckin').onchange = updateModalTotals;
+      document.getElementById('modalCheckout').onchange = updateModalTotals;
+      const closeBookingModal = () => document.getElementById('bookingModal').classList.add('hidden');
+      document.getElementById('closeBookingModalBtn').onclick = closeBookingModal;
+      document.getElementById('cancelBookingModalBtn').onclick = closeBookingModal;
+      document.getElementById('doneReceiptBtn').onclick = closeBookingModal;
+      document.getElementById('printReceiptBtn').onclick = () => window.print();
+
+      document.getElementById('bookingModalForm').onsubmit = async (e) => {
+        e.preventDefault();
+        if (!activeRoom) return;
+        const errEl = document.getElementById('modalErrorMsg');
+        const checkin = document.getElementById('modalCheckin').value;
+        const checkout = document.getElementById('modalCheckout').value;
+        const guests = Number(document.getElementById('modalGuests').value);
+        const guestName = document.getElementById('modalGuestName').value.trim();
+        const guestEmail = document.getElementById('modalGuestEmail').value.trim();
+        const guestPhone = document.getElementById('modalGuestPhone').value.trim();
+        const specialRequests = document.getElementById('modalRequests').value.trim().slice(0, 500);
+        const nights = calcNights(checkin, checkout);
+
+        if (nights < 1 || nights > 90 || guestName.length < 2 || !guestEmail.includes('@') || guestPhone.length < 6) {
+          errEl.textContent = 'Please enter valid stay dates, full name, email, and phone number.';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        errEl.classList.add('hidden');
+
+        const stayYear = Number(checkin.slice(0, 4)) || new Date().getFullYear();
+        const bookingCode = `HP-${stayYear}-${Date.now().toString().slice(-6)}`;
+        const reservationId = `res_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+        const totalPrice = activeRoom.nightlyRate * nights;
+
+        const btn = document.getElementById('submitBookingBtn');
+        btn.disabled = true;
+        btn.textContent = 'Confirming...';
+        try {
+          await setDoc(doc(db, 'reservations', reservationId), {
+            bookingCode,
+            roomId: activeRoom.id,
+            roomName: activeRoom.name,
+            nightlyRate: activeRoom.nightlyRate,
+            nights,
+            totalPrice,
+            checkin,
+            checkout,
+            guests,
+            guestName,
+            guestEmail,
+            guestPhone,
+            specialRequests,
+            status: 'Pending',
+            stayYear,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+          });
+
+          document.getElementById('bookingModalTitle').textContent = 'Booking Confirmation Receipt';
+          document.getElementById('bookingModalForm').classList.add('hidden');
+          document.getElementById('receiptPanel').classList.remove('hidden');
+          document.getElementById('receiptDetails').innerHTML = `
+            <div class="flex justify-between border-b border-stone-200 pb-3">
+              <div><div class="text-xs text-stone-500">Booking Reference</div><div class="font-mono text-lg font-bold">${esc(bookingCode)}</div></div>
+              <div class="text-right"><div class="text-xs text-stone-500">Status</div><div class="font-semibold text-amber-800">Pending Staff Confirmation</div></div>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-3">
+              <div><span class="text-xs text-stone-500 block">Room</span><strong>${esc(activeRoom.name)}</strong></div>
+              <div><span class="text-xs text-stone-500 block">Guests</span>${guests}</div>
+              <div><span class="text-xs text-stone-500 block">Check-in</span><span class="font-mono">${checkin}</span></div>
+              <div><span class="text-xs text-stone-500 block">Check-out</span><span class="font-mono">${checkout}</span></div>
+              <div><span class="text-xs text-stone-500 block">Guest Name</span>${esc(guestName)}</div>
+              <div><span class="text-xs text-stone-500 block">Contact</span><span class="text-xs font-mono">${esc(guestPhone)} · ${esc(guestEmail)}</span></div>
+            </div>
+            <div class="mt-4 flex justify-between border-t border-stone-200 pt-3 font-mono">
+              <span>${formatINR(activeRoom.nightlyRate)} × ${nights} night(s)</span>
+              <strong class="text-lg">${formatINR(totalPrice)}</strong>
+            </div>`;
+          const waText = `Namaste *Hotel Payal*! Booking Receipt:\n• Code: ${bookingCode}\n• Room: ${activeRoom.name}\n• Guest: ${guestName}\n• Dates: ${checkin} to ${checkout} (${nights}n)\n• Total: ${formatINR(totalPrice)}`;
+          document.getElementById('waReceiptLink').href = `https://wa.me/919876543210?text=${encodeURIComponent(waText)}`;
+        } catch (err) {
+          handleFirestoreError(err, OperationType.CREATE, `reservations/${reservationId}`);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Complete Booking';
+        }
+      };
+
+      // ADMIN & 10-YEAR OWNER ARCHIVE
+      function setAdminSubTab(tab) {
+        const isArch = tab === 'archive';
+        document.getElementById('reservationsPanel').classList.toggle('hidden', isArch);
+        document.getElementById('archivePanel').classList.toggle('hidden', !isArch);
+        document.getElementById('tabReservationsBtn').className = isArch
+          ? 'rounded-md px-3.5 py-2 text-xs font-semibold text-stone-600 hover:text-stone-900 whitespace-nowrap'
+          : 'rounded-md bg-white px-3.5 py-2 text-xs font-semibold text-stone-900 shadow-xs whitespace-nowrap';
+        document.getElementById('tabArchiveBtn').className = isArch
+          ? 'rounded-md bg-white px-3.5 py-2 text-xs font-semibold text-stone-900 shadow-xs whitespace-nowrap'
+          : 'rounded-md px-3.5 py-2 text-xs font-semibold text-stone-600 hover:text-stone-900 whitespace-nowrap';
+      }
+      document.getElementById('tabReservationsBtn').onclick = () => setAdminSubTab('reservations');
+      document.getElementById('tabArchiveBtn').onclick = () => setAdminSubTab('archive');
+
+      function showAdminBanner(msg) {
+        const el = document.getElementById('adminBanner');
+        el.textContent = msg;
+        el.classList.remove('hidden');
+        setTimeout(() => el.classList.add('hidden'), 4500);
+      }
+
+      onAuthStateChanged(auth, async (user) => {
+        if (unsubRes) { unsubRes(); unsubRes = null; }
+        if (unsubCust) { unsubCust(); unsubCust = null; }
+
+        const gate = document.getElementById('adminAuthGate');
+        const ws = document.getElementById('adminWorkspace');
+        const signInBtn = document.getElementById('googleSignInBtn');
+        const switchBtn = document.getElementById('switchAccountBtn');
+        const authText = document.getElementById('adminAuthText');
+
+        if (!user) {
+          gate.classList.remove('hidden');
+          ws.classList.add('hidden');
+          signInBtn.classList.remove('hidden');
+          switchBtn.classList.add('hidden');
+          authText.textContent = 'Sign in with your verified Hotel Payal staff or owner Google account to confirm incoming reservations and access the 10+ year customer database.';
+          return;
+        }
+
+        let allowed = user.emailVerified && user.email === BOOTSTRAPPED_ADMIN_EMAIL;
+        if (!allowed && user.emailVerified) {
+          try {
+            const snap = await getDoc(doc(db, 'admins', user.uid));
+            allowed = snap.exists();
+          } catch { allowed = false; }
+        }
+
+        if (!allowed) {
+          gate.classList.remove('hidden');
+          ws.classList.add('hidden');
+          signInBtn.classList.add('hidden');
+          switchBtn.classList.remove('hidden');
+          authText.textContent = `Signed in as ${user.email}. Only authorized Hotel Payal staff (${BOOTSTRAPPED_ADMIN_EMAIL}) can view reservations and the 10+ year archive.`;
+          return;
+        }
+
+        gate.classList.add('hidden');
+        ws.classList.remove('hidden');
+        document.getElementById('adminUserEmail').textContent = `Signed in as ${user.email}`;
+
+        unsubRes = onSnapshot(query(collection(db, 'reservations'), orderBy('createdAt', 'desc')), (snap) => {
+          reservations = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          renderReservations();
+        }, (err) => handleFirestoreError(err, OperationType.LIST, 'reservations'));
+
+        unsubCust = onSnapshot(query(collection(db, 'customerArchive'), orderBy('lastStayDate', 'desc')), (snap) => {
+          customers = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          renderCustomers();
+        }, (err) => handleFirestoreError(err, OperationType.LIST, 'customerArchive'));
+      });
+
+      document.getElementById('googleSignInBtn').onclick = () => signInWithPopup(auth, googleProvider);
+      document.getElementById('switchAccountBtn').onclick = () => signOut(auth);
+      document.getElementById('signOutBtn').onclick = () => signOut(auth);
+
+      function renderReservations() {
+        const q = document.getElementById('resSearchInput').value.trim().toLowerCase();
+        const st = document.getElementById('resStatusFilter').value;
+        document.getElementById('kpiResTotal').textContent = reservations.length;
+        document.getElementById('kpiResPending').textContent = reservations.filter((r) => r.status === 'Pending').length;
+        document.getElementById('kpiResConfirmed').textContent = reservations.filter((r) => r.status === 'Confirmed').length;
+        document.getElementById('kpiResRevenue').textContent = formatINR(reservations.filter((r) => r.status === 'Confirmed').reduce((s, r) => s + (r.totalPrice || 0), 0));
+
+        const rows = reservations.filter((r) => (st === 'ALL' || r.status === st) && (!q || `${r.bookingCode} ${r.guestName} ${r.guestEmail} ${r.guestPhone} ${r.roomName}`.toLowerCase().includes(q)));
+        const tbody = document.getElementById('reservationsTableBody');
+        if (!rows.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-10 text-center text-stone-500">No reservations found.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = rows.map((r) => `
+          <tr>
+            <td class="px-4 py-3 font-mono text-xs font-semibold">${esc(r.bookingCode)}</td>
+            <td class="px-4 py-3"><strong>${esc(r.guestName)}</strong><br><span class="font-mono text-xs text-stone-600">${esc(r.guestPhone)}</span><br><span class="text-xs text-stone-500">${esc(r.guestEmail)}</span></td>
+            <td class="px-4 py-3">${esc(r.roomName)}<br><span class="font-mono text-xs text-stone-600">${r.checkin} → ${r.checkout} (${r.nights}n)</span></td>
+            <td class="px-4 py-3 text-right font-mono font-semibold">${formatINR(r.totalPrice)}</td>
+            <td class="px-4 py-3 text-xs font-semibold ${r.status === 'Confirmed' ? 'text-emerald-700' : r.status === 'Cancelled' ? 'text-red-700' : 'text-amber-800'}">${r.status}</td>
+            <td class="px-4 py-3 text-right whitespace-nowrap">
+              ${r.status !== 'Confirmed' ? `<button type="button" data-confirm-id="${r.id}" class="rounded-md bg-emerald-700 px-3 py-1 text-xs font-semibold text-white hover:bg-emerald-800">Confirm</button>` : ''}
+              ${r.status !== 'Cancelled' ? `<button type="button" data-cancel-id="${r.id}" class="ml-1.5 rounded-md border border-red-200 px-3 py-1 text-xs font-semibold text-red-700 hover:bg-red-50">Cancel</button>` : ''}
+            </td>
+          </tr>`).join('');
+
+        tbody.querySelectorAll('[data-confirm-id]').forEach((b) => { b.onclick = () => updateResStatus(b.getAttribute('data-confirm-id'), 'Confirmed'); });
+        tbody.querySelectorAll('[data-cancel-id]').forEach((b) => { b.onclick = () => updateResStatus(b.getAttribute('data-cancel-id'), 'Cancelled'); });
+      }
+
+      async function updateResStatus(id, nextStatus) {
+        const res = reservations.find((r) => r.id === id);
+        if (!res) return;
+        try {
+          await updateDoc(doc(db, 'reservations', id), { status: nextStatus, updatedAt: serverTimestamp() });
+          if (nextStatus === 'Confirmed') {
+            const cId = buildCustDocId(res.guestEmail, res.guestPhone);
+            const cRef = doc(db, 'customerArchive', cId);
+            const snap = await getDoc(cRef);
+            if (snap.exists()) {
+              const prev = snap.data();
+              const stays = (prev.totalStays || 1) + 1;
+              await updateDoc(cRef, {
+                fullName: res.guestName,
+                email: res.guestEmail,
+                phone: res.guestPhone,
+                lastStayDate: res.checkin > prev.lastStayDate ? res.checkin : prev.lastStayDate,
+                lastStayYear: Math.max(prev.lastStayYear || res.stayYear, res.stayYear),
+                totalStays: stays,
+                lifetimeSpend: (prev.lifetimeSpend || 0) + res.totalPrice,
+                preferredRoom: res.roomName,
+                loyaltyTier: stays >= 5 ? 'VIP' : stays >= 2 ? 'Returning' : 'Standard',
+                updatedAt: serverTimestamp(),
+              });
+            } else {
+              await setDoc(cRef, {
+                customerCode: `HP-CUST-${res.stayYear}-${res.bookingCode.slice(-3)}`,
+                fullName: res.guestName,
+                email: res.guestEmail,
+                phone: res.guestPhone,
+                city: 'Direct Booking',
+                firstStayDate: res.checkin,
+                lastStayDate: res.checkin,
+                firstStayYear: res.stayYear,
+                lastStayYear: res.stayYear,
+                totalStays: 1,
+                lifetimeSpend: res.totalPrice,
+                preferredRoom: res.roomName,
+                loyaltyTier: 'Standard',
+                notes: res.specialRequests || 'Archived on confirmation.',
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp(),
+              });
+            }
+            showAdminBanner(`Reservation ${res.bookingCode} confirmed & archived in Owner 10+ Year Database.`);
+          } else {
+            showAdminBanner(`Reservation ${res.bookingCode} cancelled.`);
+          }
+        } catch (err) {
+          handleFirestoreError(err, OperationType.UPDATE, `reservations/${id}`);
+        }
+      }
+
+      document.getElementById('resSearchInput').oninput = renderReservations;
+      document.getElementById('resStatusFilter').onchange = renderReservations;
+
+      function renderCustomers() {
+        const q = document.getElementById('custSearchInput').value.trim().toLowerCase();
+        const era = document.getElementById('custEraFilter').value;
+        const tier = document.getElementById('custTierFilter').value;
+
+        document.getElementById('kpiCustTotal').textContent = customers.length;
+        if (customers.length) {
+          const minY = Math.min(...customers.map((c) => c.firstStayYear));
+          const maxY = Math.max(...customers.map((c) => c.lastStayYear));
+          document.getElementById('kpiCustSpan').textContent = `${minY}–${maxY}`;
+        }
+        document.getElementById('kpiCustVip').textContent = customers.filter((c) => c.loyaltyTier === 'VIP' || c.loyaltyTier === 'Returning').length;
+        document.getElementById('kpiCustSpend').textContent = formatINR(customers.reduce((s, c) => s + (c.lifetimeSpend || 0), 0));
+
+        const rows = customers.filter((c) => {
+          if (tier !== 'ALL' && c.loyaltyTier !== tier) return false;
+          if (era !== 'ALL') {
+            const [sY, eY] = era.split('-').map(Number);
+            if (!(c.firstStayYear <= eY && c.lastStayYear >= sY)) return false;
+          }
+          return !q || `${c.customerCode} ${c.fullName} ${c.email} ${c.phone} ${c.city} ${c.preferredRoom} ${c.firstStayYear} ${c.lastStayYear}`.toLowerCase().includes(q);
+        });
+
+        const tbody = document.getElementById('customersTableBody');
+        if (!rows.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-10 text-center text-stone-500">No archive records found. Click "Seed 10+ Yr Archive (2014–2026)" above to populate multi-year records.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = rows.map((c) => `
+          <tr>
+            <td class="px-4 py-3 font-mono text-xs"><strong>${esc(c.customerCode)}</strong><br><span class="text-stone-500">${c.firstStayYear} – ${c.lastStayYear}</span></td>
+            <td class="px-4 py-3"><strong>${esc(c.fullName)}</strong><br><span class="text-xs text-stone-500">${esc(c.city)}</span></td>
+            <td class="px-4 py-3 font-mono text-xs">${esc(c.phone)}<br><span class="font-sans text-stone-500">${esc(c.email)}</span></td>
+            <td class="px-4 py-3 text-xs">${c.totalStays} stay(s) · ${esc(c.preferredRoom)}<br><span class="font-mono text-stone-500">Last: ${c.lastStayDate}</span></td>
+            <td class="px-4 py-3 text-right font-mono font-semibold">${formatINR(c.lifetimeSpend)}</td>
+            <td class="px-4 py-3 text-xs font-semibold ${c.loyaltyTier === 'VIP' ? 'text-amber-800' : c.loyaltyTier === 'Returning' ? 'text-emerald-700' : 'text-stone-600'}">${c.loyaltyTier}</td>
+          </tr>`).join('');
+      }
+
+      document.getElementById('custSearchInput').oninput = renderCustomers;
+      document.getElementById('custEraFilter').onchange = renderCustomers;
+      document.getElementById('custTierFilter').onchange = renderCustomers;
+
+      document.getElementById('seedArchiveBtn').onclick = async () => {
+        try {
+          const batch = writeBatch(db);
+          for (const seed of TEN_YEAR_SEEDS) {
+            batch.set(doc(db, 'customerArchive', seed.id), {
+              ...seed,
+              createdAt: serverTimestamp(),
+              updatedAt: serverTimestamp(),
+            });
+          }
+          await batch.commit();
+          showAdminBanner('Loaded 10+ year historical customer records (2014–2026) into Owner Archive.');
+        } catch (err) {
+          handleFirestoreError(err, OperationType.WRITE, 'customerArchive');
+        }
+      };
+
+      const toggleAddCust = (open) => document.getElementById('addCustomerModal').classList.toggle('hidden', !open);
+      document.getElementById('openAddCustomerBtn').onclick = () => toggleAddCust(true);
+      document.getElementById('closeAddCustomerBtn').onclick = () => toggleAddCust(false);
+      document.getElementById('cancelAddCustomerBtn').onclick = () => toggleAddCust(false);
+
+      document.getElementById('addCustomerForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const firstStayDate = document.getElementById('custFirstDate').value;
+        const lastStayDate = document.getElementById('custLastDate').value;
+        const firstStayYear = Number(firstStayDate.slice(0, 4)) || 2015;
+        const lastStayYear = Number(lastStayDate.slice(0, 4)) || firstStayYear;
+        const id = `cust_manual_${Date.now()}`;
+        try {
+          await setDoc(doc(db, 'customerArchive', id), {
+            customerCode: `HP-CUST-${firstStayYear}-${Date.now().toString().slice(-3)}`,
+            fullName: document.getElementById('custName').value.trim(),
+            email: document.getElementById('custEmail').value.trim(),
+            phone: document.getElementById('custPhone').value.trim(),
+            city: document.getElementById('custCity').value.trim(),
+            firstStayDate,
+            lastStayDate,
+            firstStayYear,
+            lastStayYear,
+            totalStays: Math.max(1, Number(document.getElementById('custStays').value) || 1),
+            lifetimeSpend: Math.max(0, Number(document.getElementById('custSpend').value) || 0),
+            preferredRoom: document.getElementById('custRoom').value,
+            loyaltyTier: document.getElementById('custTier').value,
+            notes: document.getElementById('custNotes').value.trim().slice(0, 500),
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+          });
+          toggleAddCust(false);
+          document.getElementById('addCustomerForm').reset();
+          showAdminBanner('Customer added to 10+ Year Owner Archive.');
+        } catch (err) {
+          handleFirestoreError(err, OperationType.CREATE, `customerArchive/${id}`);
+        }
+      };
+
+      function exportCsv(filename, headers, rows) {
+        const csv = [headers.join(','), ...rows.map((r) => r.map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(','))].join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = filename; a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      document.getElementById('exportResCsvBtn').onclick = () => {
+        if (!reservations.length) return;
+        exportCsv('hotel_payal_reservations.csv', ['BookingCode', 'Status', 'GuestName', 'Email', 'Phone', 'Room', 'CheckIn', 'CheckOut', 'Nights', 'TotalINR'],
+          reservations.map((r) => [r.bookingCode, r.status, r.guestName, r.guestEmail, r.guestPhone, r.roomName, r.checkin, r.checkout, r.nights, r.totalPrice]));
+      };
+
+      document.getElementById('exportCustCsvBtn').onclick = () => {
+        if (!customers.length) return;
+        exportCsv('hotel_payal_10yr_customer_archive.csv', ['CustomerCode', 'Name', 'Email', 'Phone', 'City', 'FirstStay', 'LastStay', 'TotalStays', 'LifetimeSpendINR', 'Tier'],
+          customers.map((c) => [c.customerCode, c.fullName, c.email, c.phone, c.city, c.firstStayDate, c.lastStayDate, c.totalStays, c.lifetimeSpend, c.loyaltyTier]));
+      };
+    </script>
+  </body>
+</html>
